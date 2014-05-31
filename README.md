@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="150" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
+    <img width="250" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
 </p>
 
 # Catnap
