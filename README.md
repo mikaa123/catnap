@@ -1,3 +1,4 @@
+![catnap](catnap.png)
 
 Catnap helps you REST.
 
