@@ -1,8 +1,6 @@
-<p align="center">
-    <img width="300" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
-</p>
-
 # Catnap
+
+<img width="300" align="right" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
 
 > a catnap helps you get Express REST.
 
