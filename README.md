@@ -1,4 +1,6 @@
-![catnap](catnap.png)
+<p align="center">
+    <img src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
+</p>
 
 # Catnap
 
