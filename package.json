@@ -1,7 +1,7 @@
 {
-  "name": "nap",
-  "version": "0.1.0",
-  "description": "Nap helps you have Express REST.",
+  "name": "catnap",
+  "version": "0.1.1",
+  "description": "Catnap helps you REST.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
