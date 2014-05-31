@@ -4,6 +4,6 @@
 
 # Catnap
 
-> Catnap helps you REST.
+> a catnap helps you get Express REST.
 
-Catnap lets you create REST Resources on middleware-based routers, such as Express'. It simplifies **defining representations** and actions, while keeping your code DRY. Catnap is minimalist and doesn't get in your way by imposing an architecture. It can be dropped as-is on existing Express projects.
+Catnap is a minimal approach to handle REST Resources on Express-like routers. It simplifies creating named resources and **defining their representations**, while keeping your code DRY. Catnap doesn't get in your way by imposing an architecture. It can be dropped as-is on existing Express projects.
