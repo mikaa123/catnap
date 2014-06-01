@@ -21,13 +21,13 @@ var userResource = makeResource('user', '/users/:userId')
         // The default representation. Returns a full representation of user
     })
     .representation('partial', function (user) {
-    	// This is a named representation. In this case, we want to returned a partial representation
+    	// This is a named representation. Let's return a partial representation
     })
     .get(function (req, res) {
     	// Action methods take standard middleware.
-	User.findOne({ _id: req.params.userId }, function (err, user) {
-		user && res.send(200, userResource(user));
-	});
+        User.findOne({ _id: req.params.userId }, function (err, user) {
+            user && res.send(200, userResource(user));
+        });
     });
 ~~~~
 
