@@ -61,25 +61,25 @@ call the Resource function, `usersResource` in our case with the desired entity:
 usersResource
     .get(function (req, res) {
         User.find({}, function (err, users) {
-		res.send(200, usersResource(users));
-	});
+	    res.send(200, usersResource(users));
+        });
     });
 ~~~~
 
 It is possible to have multiple representations of the same resource. For example, we can define a `user` resource, with a default and a **partial** representation. That way, we could return partial representations of each `user` when we _GET_ /users.
 
 ~~~~javascript
-userResource = makeResource('user', '/user'
+userResource = makeResource('user', '/user')
     .representation(function (user) {
     	return user; // We want the full representation here.
     })
     
     // We register a 'partial' representation.
     .representation('partial', function (users) {
-    	return {
-    	  name: users.name,
-    	  age: users.age
-    	};
+        return {
+            name: users.name,
+            age: users.age
+        };
     });
 ~~~~
 
@@ -89,8 +89,8 @@ Now we can revisit our usersResource to use userResource's partial representatio
 usersResource
     .get(function (req, res) {
         User.find({}, function (err, users) {
-		res.send(200, userResource('partial', users));
-	});
+            res.send(200, userResource('partial', users));
+        });
     });
 ~~~~
 
