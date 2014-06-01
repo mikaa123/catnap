@@ -31,5 +31,5 @@ var userResource = makeResource('user', '/users/:userId')
     });
 ~~~~
 
-For more, check out the [Getting Started Guide](./wiki/Getting-Started)
-For an example, check the [Example application](./wiki/Example-application)
+* For more, check out the [Getting Started Guide](./wiki/Getting-Started)
+* For an example, check the [Example application](./wiki/Example-application)
