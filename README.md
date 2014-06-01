@@ -61,7 +61,7 @@ call the Resource function, `usersResource` in our case with the desired entity:
 usersResource
     .get(function (req, res) {
         User.find({}, function (err, users) {
-	    res.send(200, usersResource(users));
+            res.send(200, usersResource(users));
         });
     });
 ~~~~
