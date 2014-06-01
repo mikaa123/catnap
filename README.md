@@ -3,7 +3,7 @@
 
 <img width="300" align="right" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
 
-> a catnap helps you get Express REST.
+> A short nap, which allows for a quick boost in energy.
 
 Catnap is a minimal approach to **handle REST Resources** on Express-like routers. It simplifies creating named resources and **defining their representations** while keeping your code DRY.
 
