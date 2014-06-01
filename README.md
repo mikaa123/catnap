@@ -31,5 +31,4 @@ var userResource = makeResource('user', '/users/:userId')
     });
 ~~~~
 
-* For more, check out the [[Getting Started Guide]]
-* For an example, check the [Example application](Example-application)
+* For more, check out the [Getting Started Guide](http://github.com/mikaa123/catnap/wiki/Getting-Started)
