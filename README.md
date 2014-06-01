@@ -1,5 +1,5 @@
 # Catnap
-[![NPM version](https://badge.fury.io/js/catnap.svg)](http://badge.fury.io/js/catnap)
+[![NPM version](https://badge.fury.io/js/catnap.svg)](http://badge.fury.io/js/catnap) [![Build Status](https://travis-ci.org/mikaa123/catnap.svg?branch=master)](https://travis-ci.org/mikaa123/catnap)
 
 <img width="300" align="right" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
 
