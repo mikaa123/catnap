@@ -19,7 +19,7 @@ var express = require('express'),
     makeResource = require('catnap').makeResource;
 
 // Let's create a Resource 'users', located at '/users'.
-usersResource = makeResource('users', /users');
+usersResource = makeResource('users', '/users');
 
 usersResource
     .get(function (req, res) {
