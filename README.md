@@ -1,4 +1,5 @@
 # Catnap
+[![NPM version](https://badge.fury.io/js/catnap.svg)](http://badge.fury.io/js/catnap)
 
 <img width="300" align="right" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
 
