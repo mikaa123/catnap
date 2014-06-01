@@ -13,7 +13,7 @@ Catnap doesn't get in your way by imposing an architecture. It can be dropped as
 `$ npm install catnap`
 
 ## Getting Started
-Catnap lets you create **Resources** identified by a name and a path. A Resource can have one or many **representations** and respond to **actions** (get, post, put, patch an delete.) Here is a contrived example.
+Catnap lets you create **Resources** identified by a name and a path. A Resource can have one or many **representations** and respond to **actions** (get, post, put, patch an delete.) Here is a contrived example:
 
 ~~~~javascript
 var makeResource = require('catnap').makeResource;
@@ -24,7 +24,7 @@ var userResource = makeResource('user', '/users/:userId')
         return user;
     })
     .representation('partial', function (user) {
-    	// This is a named representation. Let's return a partial representation
+    	// This is a named representation that returns a partial representation
     	return pick(user, 'username', 'email');
     })
     .get(function (req, res) {
