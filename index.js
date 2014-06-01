@@ -1,1 +1,1 @@
-module.exports = require('./lib/nap');
+module.exports = require('./lib/catnap');
