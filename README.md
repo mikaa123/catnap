@@ -43,7 +43,7 @@ A Resource has one or many **representations**. They are typically returned when
 ~~~~javascript
 usersResource
 
-    // Here we define a **default** representation for the `usersResource`.
+    // Here we define the default representation for the `usersResource`.
     .representation(function (users) {
         return {
             count: users.length,
@@ -52,6 +52,18 @@ usersResource
             }
         };
     });
+~~~~
+
+A representation takes an **entity** which is usually what is stored in your database. In order to use a representation,
+call the Resource function, `usersResource` in our case with the desired entity:
+
+~~~~javascript
+usersResource
+    .get(function (req, res) {
+        User.find({}, function (err, users) {
+			res.send(200, usersResource(users));
+		});
+    })
 ~~~~
 
 ## Contributing
