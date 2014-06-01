@@ -21,9 +21,11 @@ var makeResource = require('catnap').makeResource;
 var userResource = makeResource('user', '/users/:userId')
     .representation(function (user) {
         // The default representation. Returns a full representation of user
+        return user;
     })
     .representation('partial', function (user) {
     	// This is a named representation. Let's return a partial representation
+    	return pick(user, 'username', 'email');
     })
     .get(function (req, res) {
     	// Action methods take standard middleware.
