@@ -10,88 +10,92 @@ Catnap doesn't get in your way by imposing an architecture. It can be dropped as
 
 ## Installing
 
-## Getting Started
-Catnap lets you create **Resources**, identified by a name and a path. They expose verbs methods (get, post, patch, put and delete) that take middleware, and let you define representations.
-
+## Example
 ~~~~javascript
 var express = require('express'),
-    app = express(), // Standard Express stuff.
-    makeResource = require('catnap').makeResource;
+	app = express(), // Standard Express stuff.
+	makeResource = require('catnap').makeResource;
 
-// Let's create a Resource 'users', located at '/users'.
-usersResource = makeResource('users', '/users');
 
-usersResource
-    .get(function (req, res) {
-        // Answers with the list of users
-    })
+/**
+ * User Resource - /users/:userId
+ * Supported action: GET
+ * media type: hal+json
+ */
+var userResource = makeResource('user', '/users/:userId')
 
-    .post(function (req, res) {
-        // Lets us create a user and returns its representation
-    });
-        
-// Now that the resource is defined, we can attach it to `app`.
-usersResource.attachTo(app);
-    
+	.representation(function(user) {
+		return extend(pick(user, 'username', 'createdAt', 'updatedAt'), {
+			_links: {
+				self: {
+					href: this.path.replace(':userId', user.id)
+				}
+			}
+		});
+	})
+
+	.representation('partial', function(user) {
+		return {
+			name: user.name,
+			age: user.age
+		};
+	})
+
+	.get(function(req, res) {
+		User.findOne({ _id: req.params.userId }, function (err, user) {
+			user && res.send(200, userResource(user));
+		});
+	})
+
+	.attachTo(app);
+
+
+/**
+ * Users Resource - /users
+ * Supported action: GET, POST
+ * media type: hal+json
+ */
+var usersResource = makeResource('users', '/users')
+
+	.representation(function (users) {
+		var _users = users.map(function (user) {
+			return userResource(user, 'partial');
+		});
+
+		return {
+			count: users.length,
+			_embedded: {
+				users: _users
+			}
+		};
+	})
+
+	.get(function (req, res) {
+		User.find({}, function (err, users) {
+			res.answer(usersResource(users));
+		});
+	})
+
+	.post(function (req, res, next) {
+		// Some checking here.
+		user = new User(reqBody);
+		user.save(function (err, newUser) {
+
+			if (err) {
+				// Handle error.
+			}
+
+			res.send(201, userResource(newUser));
+		});
+
+	})
+
+	.attachTo(app);
+
+
 var server = app.listen(3000, function() {
-    console.log('Listening on port %d', server.address().port);
+	console.log('Listening on port %d', server.address().port);
 });
-~~~~
-
-A Resource has one or many **representations**. They are typically returned when we _GET_ them. Let's define a representation for our `usersResource` using the hal+json media type.
-
-~~~~javascript
-usersResource
-
-    // Here we define the default representation for the `usersResource`.
-    .representation(function (users) {
-        return {
-            count: users.length,
-            _embedded: {
-                users: users
-            }
-        };
-    });
-~~~~
-
-A representation takes an **entity** which is usually what is stored in your database. In order to use a representation,
-call the Resource function, `usersResource` in our case with the desired entity:
-
-~~~~javascript
-usersResource
-    .get(function (req, res) {
-        User.find({}, function (err, users) {
-            res.send(200, usersResource(users));
-        });
-    });
-~~~~
-
-It is possible to have multiple representations of the same resource. For example, we can define a `user` resource, with a default and a **partial** representation. That way, we could return partial representations of each `user` when we _GET_ /users.
-
-~~~~javascript
-userResource = makeResource('user', '/user')
-    .representation(function (user) {
-    	return user; // We want the full representation here.
-    })
-    
-    // We register a 'partial' representation.
-    .representation('partial', function (users) {
-        return {
-            name: users.name,
-            age: users.age
-        };
-    });
-~~~~
-
-Now we can revisit our usersResource to use userResource's partial representation.
-
-~~~~javascript
-usersResource
-    .get(function (req, res) {
-        User.find({}, function (err, users) {
-            res.send(200, userResource('partial', users));
-        });
-    });
 ~~~~
 
 ## Contributing
