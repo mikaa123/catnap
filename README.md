@@ -11,20 +11,47 @@ Catnap doesn't get in your way by imposing an architecture. It can be dropped as
 ## Installing
 
 ## How to use
-Catnap lets you create **Resources**, identified by a name and a path. They expose verbs methods (get, post, patch, put and delete) that take middleware.
+Catnap lets you create **Resources**, identified by a name and a path. They expose verbs methods (get, post, patch, put and delete) that take middleware, and let you define representations.
 
 ~~~~javascript
-var makeResource = require('catnap').makeResource,
-    usersResource = makeResource('users', /users');
+var express = require('express'),
+    app = express(), // Standard Express stuff.
+    makeResource = require('catnap').makeResource;
 
-    usersResource
-        .post(function (req, res) {
-            // Do something meaningful here.
-        })
-        .get(function (req, res) {
-            // Do something here.
-        });
+// Let's create a Resource 'users', located at '/users'.
+usersResource = makeResource('users', /users');
 
+usersResource
+    .get(function (req, res) {
+        // Answers with the list of users
+    })
+
+    .post(function (req, res) {
+        // Lets us create a user and returns its representation
+    });
+        
+// Now that the resource is defined, we can attach it to `app`.
+usersResource.attachTo(app);
+    
+var server = app.listen(3000, function() {
+    console.log('Listening on port %d', server.address().port);
+});
+~~~~
+
+A Resource has one or many **representations**. They are typically returned when we _GET_ them. Let's define a representation for our `usersResource` using the hal+json media type.
+
+~~~~javascript
+usersResource
+
+    // Here we define a **default** representation for the `usersResource`.
+    .representation(function (users) {
+        return {
+            count: users.length,
+            _embedded: {
+                users: users
+            }
+        };
+    });
 ~~~~
 
 ## Contributing
