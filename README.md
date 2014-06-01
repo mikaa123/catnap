@@ -10,6 +10,27 @@ Catnap doesn't get in your way by imposing an architecture. It can be dropped as
 
 ## Installing
 
+## Getting Started
+Catnap lets you create **Resources** identified by a name and a path. A Resource can have one or many **representations** and respond to **actions** (get, post, put, patch an delete.) Here is a contrived example.
+
+~~~~javascript
+var makeResource = require('catnap').makeResource;
+
+var userResource = makeResource('user', '/users/:userId')
+    .representation(function (user) {
+        // The default representation. Returns a full representation of user
+    })
+    .representation('partial', function (user) {
+    	// This is a named representation. In this case, we want to returned a partial representation
+    })
+    .get(function (req, res) {
+    	// Action methods take standard middleware.
+	User.findOne({ _id: req.params.userId }, function (err, user) {
+		user && res.send(200, userResource(user));
+	});
+    });
+~~~~
+
 ## Example
 ~~~~javascript
 var express = require('express'),
