@@ -10,6 +10,8 @@ Catnap doesn't get in your way by imposing an architecture. It can be dropped as
 
 ## Installing
 
+`npm install catnap`
+
 ## Getting Started
 Catnap lets you create **Resources** identified by a name and a path. A Resource can have one or many **representations** and respond to **actions** (get, post, put, patch an delete.) Here is a contrived example.
 
