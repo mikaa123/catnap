@@ -10,7 +10,7 @@ Catnap doesn't get in your way by imposing an architecture. It can be dropped as
 
 ## Installing
 
-## How to use
+## Getting Started
 Catnap lets you create **Resources**, identified by a name and a path. They expose verbs methods (get, post, patch, put and delete) that take middleware, and let you define representations.
 
 ~~~~javascript
