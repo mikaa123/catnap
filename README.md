@@ -24,7 +24,7 @@ var userResource = makeResource('user', '/users/:userId')
         return user;
     })
     .representation('partial', function (user) {
-    	// This is a named representation that returns a partial representation
+    	// A named representation that returns a partial representation
     	return pick(user, 'username', 'email');
     })
     .get(function (req, res) {
