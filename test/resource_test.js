@@ -79,6 +79,7 @@ describe('Resource', function () {
 				a: 1
 			};
 
+			// Object syntax
 			testResource.representation({
 				'foo': function (e) {
 					return 'foo';
@@ -99,6 +100,17 @@ describe('Resource', function () {
 			});
 
 			testResource(defaultEntity, 'isolated').should.eql('isolated');
+
+			// Alternate syntax
+			testResource.representation('partial', function () {
+				return 'partial';
+			});
+
+			testResource(defaultEntity, 'partial').should.eql('partial');
+
+			assert.throws(function () {
+				testResource.representation('err', {});
+			});
 		});
 	});
 
