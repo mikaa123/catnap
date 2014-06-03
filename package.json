@@ -1,6 +1,6 @@
 {
   "name": "catnap",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Catnap helps you REST.",
   "repository": "https://github.com/mikaa123/catnap/blob/master/README.md",
   "main": "index.js",
