@@ -32,7 +32,16 @@ var userResource = makeResource('user', '/users/:userId')
         User.findOne({ _id: req.params.userId }, function (err, user) {
             user && res.send(200, userResource(user));
         });
-    });
+    })
+    .attachTo(app);
+~~~~
+
+The representations map **internal entities** (such as the ones in your database) into media types.
+To get the representations of `userResource`:
+
+~~~~javascript
+userResource(user); // => Calls the default representation
+userResource(user, 'partial'); // => Calls the partial representation
 ~~~~
 
 * To get started, check out the [Getting Started Guide](http://github.com/mikaa123/catnap/wiki/Getting-Started)
