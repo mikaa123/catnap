@@ -15,7 +15,7 @@ describe('Resource', function () {
 			});
 
 			testResource._name.should.eql('test');
-			testResource.path.should.eql('/test');
+			testResource.path().should.eql('/test');
 		});
 
 		it('should throw an exception if the name is undefined', function () {
@@ -131,6 +131,44 @@ describe('Resource', function () {
 			verbs.forEach(function (v) {
 				router[v].called.should.be.true;
 			});
+		});
+	});
+
+	describe('Constructing a Resource path', function () {
+		var testResource;
+
+		beforeEach(function () {
+			testResource = makeResource('talk', '/issues/:issueId/talks/:talkId');
+		});
+
+		it('should return the complete path if no argument is passed', function () {
+			testResource.path().should.eql('/issues/:issueId/talks/:talkId');
+		});
+
+		it('should throw an exception if the passed argument is not an object', function () {
+			assert.throws(function () {
+				testResource.path("test");
+			});
+
+			assert.throws(function () {
+				testResource.path(null);
+			});
+		});
+
+		it('should return the constructed path', function () {
+			testResource.path({
+				'issueId': "a",
+				'talkId': "b"
+			}).should.eql('/issues/a/talks/b');
+
+			testResource.path({
+				':issueId': "a",
+				':talkId': "b"
+			}).should.eql('/issues/a/talks/b');
+
+			testResource.path({
+				'issueId': "foo",
+			}).should.eql('/issues/foo/talks/:talkId');
 		});
 	});
 });
