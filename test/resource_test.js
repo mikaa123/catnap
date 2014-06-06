@@ -141,8 +141,9 @@ describe('Resource', function () {
 			testResource = makeResource('talk', '/issues/:issueId/talks/:talkId');
 		});
 
-		it('should return the complete path if no argument is passed', function () {
+		it('should return the complete path if no argument, or an empty object is passed', function () {
 			testResource.path().should.eql('/issues/:issueId/talks/:talkId');
+			testResource.path({}).should.eql('/issues/:issueId/talks/:talkId');
 		});
 
 		it('should throw an exception if the passed argument is not an object', function () {
@@ -164,6 +165,11 @@ describe('Resource', function () {
 			testResource.path({
 				':issueId': "a",
 				':talkId': "b"
+			}).should.eql('/issues/a/talks/b');
+
+			testResource.path({
+				issueId: "a",
+				talkId: "b"
 			}).should.eql('/issues/a/talks/b');
 
 			testResource.path({
