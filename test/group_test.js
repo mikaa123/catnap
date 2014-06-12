@@ -38,5 +38,17 @@ describe('Group', function () {
 				});
 			});
 		});
+
+		it('Should allow to conveniently create a resource', function () {
+			var newResource = group.makeResource('test', '/test');
+
+			// Makes sure the created Resource is a resource
+			newResource.should.be.a.Function;
+			['attachTo', 'representation'].forEach(function(m) {
+				newResource[m].should.be.ok;
+			});
+
+			group('test').should.eql(newResource);
+		});
 	});
 });
