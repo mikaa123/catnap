@@ -18,17 +18,10 @@ describe('Group', function () {
 			myGroup = group();
 		});
 
-		it('Should allow adding one or many resources', function () {
-			var one = resource('one', '/one'),
-				two = resource('two', '/two'),
-				three = resource('three', '/three');
-
-			myGroup.add(one);
-			myGroup.add(two, three);
-
-			myGroup('one').should.eql(one);
-			myGroup('two').should.eql(two);
-			myGroup('three').should.eql(three);
+		it('Should allow associating a name ot a resources', function () {
+			var fooRes = resource('/foo');
+			myGroup.put('myResource', fooRes);
+			myGroup('myResource').should.eql(fooRes);
 		});
 
 		it("Should throw if the Resource isn't available", function () {

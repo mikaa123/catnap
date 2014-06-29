@@ -11,26 +11,17 @@ describe('Resource', function () {
 			var testResource;
 
 			assert.doesNotThrow(function () {
-				testResource = resource('test', '/test');
+				testResource = resource('/test');
 			});
 
-			testResource._name.should.eql('test');
 			testResource.path().should.eql('/test');
-		});
-
-		it('should throw an exception if the name is undefined', function () {
-			var testResource;
-
-			assert.throws(function () {
-				testResource = resource(undefined, '/test');
-			});
 		});
 
 		it('should throw an exception if the path is undefined', function () {
 			var testResource;
 
 			assert.throws(function () {
-				testResource = resource('test');
+				testResource = resource(undefined);
 			});
 		});
 	});
@@ -39,17 +30,16 @@ describe('Resource', function () {
 		var testResource;
 
 		beforeEach(function () {
-			testResource = resource('test', '/test');
+			testResource = resource('/test');
 		});
 
 		verbs.forEach(function (action) {
 			it('should allow ' + action, function () {
-				testResource[action](function (req, res) {
-					return 'foo';
-				});
+				var myTestingMiddleware = function (req, res) {};
+				testResource[action](myTestingMiddleware);
 
-				testResource.actions[action][0]()
-				.should.eql('foo');
+				testResource.actions[action][0]
+				.should.eql(myTestingMiddleware);
 			});
 		});
 
@@ -63,7 +53,7 @@ describe('Resource', function () {
 		var testResource;
 
 		beforeEach(function () {
-			testResource = resource('test', '/test');
+			testResource = resource('/test');
 		});
 
 		it('should allow default representation', function () {
@@ -117,7 +107,7 @@ describe('Resource', function () {
 	describe('Attaching to routers', function () {
 		it('should throw if the router does not have the required interface',
 		function () {
-			var testResource = resource('test', '/test'),
+			var testResource = resource('/test'),
 				router = {};
 
 			verbs.forEach(function (v) {
@@ -138,7 +128,7 @@ describe('Resource', function () {
 		var testResource;
 
 		beforeEach(function () {
-			testResource = resource('talk', '/issues/:issueId/talks/:talkId');
+			testResource = resource('/issues/:issueId/talks/:talkId');
 		});
 
 		it('should return the complete path if no argument, or an empty object is passed', function () {
