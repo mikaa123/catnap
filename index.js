@@ -1,1 +1,2 @@
-module.exports = require('./lib/catnap');
+module.exports.resource = require('./lib/resource');
+module.exports.group = require('./lib/group');
