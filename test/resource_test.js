@@ -69,29 +69,12 @@ describe('Resource', function () {
 				a: 1
 			};
 
-			// Object syntax
-			testResource.representation({
-				'foo': function (e) {
-					return 'foo';
-				},
-
-				'bar': function (e) {
-					return 'bar';
-				}
+			testResource.representation(function () {
+				return 'default';
 			});
 
-			// Returns the default entity when no formatter exists
-			testResource(defaultEntity).should.eql(defaultEntity);
-			testResource(defaultEntity, 'foo').should.eql('foo');
-			testResource(defaultEntity, 'bar').should.eql('bar');
+			testResource(defaultEntity).should.eql('default');
 
-			testResource.representation('isolated', function () {
-				return 'isolated';
-			});
-
-			testResource(defaultEntity, 'isolated').should.eql('isolated');
-
-			// Alternate syntax
 			testResource.representation('partial', function () {
 				return 'partial';
 			});
