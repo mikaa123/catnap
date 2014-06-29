@@ -1,7 +1,7 @@
 var assert = require('assert'),
 	should = require('should'),
 	sinon = require('sinon'),
-	makeResource = require('../').makeResource;
+	resource = require('../').resource;
 
 var verbs = ['get', 'post', 'put', 'patch', 'delete'];
 
@@ -11,7 +11,7 @@ describe('Resource', function () {
 			var testResource;
 
 			assert.doesNotThrow(function () {
-				testResource = makeResource('test', '/test');
+				testResource = resource('test', '/test');
 			});
 
 			testResource._name.should.eql('test');
@@ -22,7 +22,7 @@ describe('Resource', function () {
 			var testResource;
 
 			assert.throws(function () {
-				testResource = makeResource(undefined, '/test');
+				testResource = resource(undefined, '/test');
 			});
 		});
 
@@ -30,7 +30,7 @@ describe('Resource', function () {
 			var testResource;
 
 			assert.throws(function () {
-				testResource = makeResource('test');
+				testResource = resource('test');
 			});
 		});
 	});
@@ -39,7 +39,7 @@ describe('Resource', function () {
 		var testResource;
 
 		beforeEach(function () {
-			testResource = makeResource('test', '/test');
+			testResource = resource('test', '/test');
 		});
 
 		verbs.forEach(function (action) {
@@ -63,7 +63,7 @@ describe('Resource', function () {
 		var testResource;
 
 		beforeEach(function () {
-			testResource = makeResource('test', '/test');
+			testResource = resource('test', '/test');
 		});
 
 		it('should allow default representation', function () {
@@ -117,7 +117,7 @@ describe('Resource', function () {
 	describe('Attaching to routers', function () {
 		it('should throw if the router does not have the required interface',
 		function () {
-			var testResource = makeResource('test', '/test'),
+			var testResource = resource('test', '/test'),
 				router = {};
 
 			verbs.forEach(function (v) {
@@ -138,7 +138,7 @@ describe('Resource', function () {
 		var testResource;
 
 		beforeEach(function () {
-			testResource = makeResource('talk', '/issues/:issueId/talks/:talkId');
+			testResource = resource('talk', '/issues/:issueId/talks/:talkId');
 		});
 
 		it('should return the complete path if no argument, or an empty object is passed', function () {

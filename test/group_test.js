@@ -2,7 +2,7 @@ var assert = require('assert'),
 	should = require('should'),
 	sinon = require('sinon'),
 	makeGroup = require('../').makeGroup,
-	makeResource = require('../').makeResource;
+	resource = require('../').resource;
 
 describe('Group', function () {
 	describe('Create a group', function () {
@@ -19,9 +19,9 @@ describe('Group', function () {
 		});
 
 		it('Should allow adding one or many resources', function () {
-			var one = makeResource('one', '/one'),
-				two = makeResource('two', '/two'),
-				three = makeResource('three', '/three');
+			var one = resource('one', '/one'),
+				two = resource('two', '/two'),
+				three = resource('three', '/three');
 
 			group.add(one);
 			group.add(two, three);
