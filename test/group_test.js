@@ -1,21 +1,21 @@
 var assert = require('assert'),
 	should = require('should'),
 	sinon = require('sinon'),
-	makeGroup = require('../').makeGroup,
+	group = require('../').group,
 	resource = require('../').resource;
 
 describe('Group', function () {
 	describe('Create a group', function () {
 		it('Should create a new group', function () {
-			makeGroup().should.be.ok;
+			group().should.be.ok;
 		});
 	});
 
 	describe('Adding resources', function () {
-		var group;
+		var myGroup;
 
 		beforeEach(function () {
-			group = makeGroup();
+			myGroup = group();
 		});
 
 		it('Should allow adding one or many resources', function () {
@@ -23,24 +23,24 @@ describe('Group', function () {
 				two = resource('two', '/two'),
 				three = resource('three', '/three');
 
-			group.add(one);
-			group.add(two, three);
+			myGroup.add(one);
+			myGroup.add(two, three);
 
-			group('one').should.eql(one);
-			group('two').should.eql(two);
-			group('three').should.eql(three);
+			myGroup('one').should.eql(one);
+			myGroup('two').should.eql(two);
+			myGroup('three').should.eql(three);
 		});
 
 		it("Should throw if the Resource isn't available", function () {
 			[undefined, null, 'coffee'].forEach(function (v) {
 				assert.throws(function () {
-					group(v);
+					myGroup(v);
 				});
 			});
 		});
 
 		it('Should allow to conveniently create a resource', function () {
-			var newResource = group.makeResource('test', '/test');
+			var newResource = myGroup.resource('test', '/test');
 
 			// Makes sure the created Resource is a resource
 			newResource.should.be.a.Function;
@@ -48,7 +48,7 @@ describe('Group', function () {
 				newResource[m].should.be.ok;
 			});
 
-			group('test').should.eql(newResource);
+			myGroup('test').should.eql(newResource);
 		});
 	});
 });
