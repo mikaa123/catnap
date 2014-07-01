@@ -7,11 +7,22 @@ var verbs = ['get', 'post', 'put', 'patch', 'delete'];
 
 describe('Resource', function () {
 	describe('Creation', function () {
-		it('should create a resource when a correct name and path are given', function () {
+		it('should create a resource when a correct path is given', function () {
 			var testResource;
 
 			assert.doesNotThrow(function () {
 				testResource = resource('/test');
+			});
+
+			testResource.path().should.eql('/test');
+		});
+
+		it('should create a resource if a path and a router is provided', function () {
+			var myRouter = {};
+			var testResource;
+
+			assert.doesNotThrow(function () {
+				testResource = resource('/test', myRouter);
 			});
 
 			testResource.path().should.eql('/test');
@@ -46,6 +57,17 @@ describe('Resource', function () {
 		it('should allow multiple middlewares per actions', function () {
 			testResource.get(function () {}, function () {});
 			testResource.actions.get.length.should.eql(2);
+		});
+
+		it('should register actions on the router if it has been provided', function () {
+			var router = {},
+				testResource = resource('/test', router);
+
+			verbs.forEach(function (v) {
+				router[v] = sinon.spy();
+				testResource[v](function () {}, function () {});
+				router[v].called.should.be.true;
+			});
 		});
 	});
 
