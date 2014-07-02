@@ -1,12 +1,13 @@
 {
   "name": "catnap",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Catnap helps you REST.",
   "repository": "https://github.com/mikaa123/catnap/blob/master/README.md",
   "main": "index.js",
+  "bin": "bin/catnap",
   "scripts": {
     "test": "mocha",
-		"coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "keywords": [
     "Express",
@@ -24,5 +25,8 @@
     "istanbul": "~0.2.10",
     "coveralls": "~2.10.0",
     "mocha-lcov-reporter": "0.0.1"
+  },
+  "dependencies": {
+    "express": "~4.4.5"
   }
 }
