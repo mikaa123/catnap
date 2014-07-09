@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var express = require('express'),
+	fs = require('fs'),
 	app = express();
 
 app.listen(3000, function () {
@@ -15,8 +16,15 @@ var readdirp = require('readdirp');
 
 var stream = readdirp({ root: process.cwd(), fileFilter: '*-resource.js' })
 	.on('readable', function () {
-		var resource = stream.read();
-		require(resource.fullPath);
+		var resourcePath = stream.read().fullPath;
+		require(resourcePath);
+
+		fs.watchFile(resourcePath, function () {
+			console.log(require.cache[resourcePath]);
+			delete require.cache[resourcePath];
+			require(resourcePath);
+			console.log('reloaded!!!:)');
+		});
 	})
 	.on('end', function () {
 		app.use(function(req, res, next) {
