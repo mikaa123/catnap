@@ -2,32 +2,43 @@
 
 var express = require('express'),
 	fs = require('fs'),
-	app = express();
-
-app.listen(3000, function () {
-	console.log('Server running on port', 3000);
-});
-
-// Catnap's facade
-GLOBAL.catnap = require('../lib/facade')(app);
+	server,
+	app;
 
 // Walk each folders to find *-resource.js files
 var readdirp = require('readdirp');
 
+var resources = [];
+function restartServer() {
+	server && server.close();
+	app = express();
+
+	// Catnap's facade
+	GLOBAL.catnap = require('../lib/facade')(app);
+
+	resources.forEach(function (resource) {
+		require.cache[resource] && delete require.cache[resource];
+		require(resource);
+	});
+
+	app.use(function(req, res, next) {
+		res.send(404, 'Sorry cant find that!');
+	});
+
+	server = app.listen(3000, function () {
+		console.log('Server running on port', 3000);
+	});
+}
+
 var stream = readdirp({ root: process.cwd(), fileFilter: '*-resource.js' })
 	.on('readable', function () {
-		var resourcePath = stream.read().fullPath;
-		require(resourcePath);
-
-		fs.watchFile(resourcePath, function () {
-			console.log(require.cache[resourcePath]);
-			delete require.cache[resourcePath];
-			require(resourcePath);
-			console.log('reloaded!!!:)');
-		});
+		resources.push(stream.read().fullPath);
 	})
 	.on('end', function () {
-		app.use(function(req, res, next) {
-			res.send(404, 'Sorry cant find that!');
+		restartServer();
+		resources.forEach(function (resource) {
+			fs.watchFile(resource, function () {
+				restartServer();
+			});
 		});
 	});
