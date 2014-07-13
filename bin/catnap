@@ -1,44 +1,20 @@
 #!/usr/bin/env node
 
-var express = require('express'),
-	fs = require('fs'),
-	server,
-	app;
+var nodemon = require('nodemon'),
+	path = require('path');
 
-// Walk each folders to find *-resource.js files
-var readdirp = require('readdirp');
+nodemon({
+	watch: process.cwd(),
+	script: path.join(__dirname, 'catnap_runner')
+});
 
-var resources = [];
-function restartServer() {
-	server && server.close();
-	app = express();
-
-	// Catnap's facade
-	GLOBAL.catnap = require('../lib/facade')(app);
-
-	resources.forEach(function (resource) {
-		require.cache[resource] && delete require.cache[resource];
-		require(resource);
-	});
-
-	app.use(function(req, res, next) {
-		res.send(404, 'Sorry cant find that!');
-	});
-
-	server = app.listen(3000, function () {
-		console.log('Server running on port', 3000);
-	});
-}
-
-var stream = readdirp({ root: process.cwd(), fileFilter: '*-resource.js' })
-	.on('readable', function () {
-		resources.push(stream.read().fullPath);
+nodemon
+	.on('start', function () {
+		console.log('app started');
 	})
-	.on('end', function () {
-		restartServer();
-		resources.forEach(function (resource) {
-			fs.watchFile(resource, function () {
-				restartServer();
-			});
-		});
+	.on('quit', function () {
+		console.log('quit');
+	})
+	.on('restart', function (files) {
+		console.log('restart!');
 	});
