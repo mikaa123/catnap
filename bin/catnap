@@ -12,11 +12,11 @@ nodemon({
 
 nodemon
 	.on('start', function () {
-		console.log('app started');
+		console.log('Starting app...');
 	})
 	.on('quit', function () {
 		console.log('quit');
 	})
 	.on('restart', function (files) {
-		console.log('restart!');
+		console.log('File changed:', files);
 	});
