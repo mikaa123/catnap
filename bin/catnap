@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
 var nodemon = require('nodemon'),
-	path = require('path');
+	path = require('path'),
+	argv = require('minimist')(process.argv.slice(1));
 
 nodemon({
 	watch: process.cwd(),
-	script: path.join(__dirname, 'catnap_runner')
+	script: path.join(__dirname, 'catnap_runner'),
+	args: argv.p ? [argv.p] : []
 });
 
 nodemon

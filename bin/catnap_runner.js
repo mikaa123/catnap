@@ -1,9 +1,13 @@
 var express = require('express'),
-	app = express();
+	app = express(),
+	port = process.argv[2] || 3000;
 
-app.listen(3000, function () {
-	console.log('Server running on port', 3000);
-});
+app.listen(port, function () {
+	console.log('Server running on port', port);
+})
+	.on('error', function () {
+		console.log('Port %s already used.', port);
+	});
 
 // Catnap's facade
 GLOBAL.catnap = require('../lib/facade')(app);
