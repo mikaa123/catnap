@@ -1,11 +1,9 @@
 # Catnap
 [![NPM version](https://badge.fury.io/js/catnap.svg)](http://badge.fury.io/js/catnap) [![Build Status](https://travis-ci.org/mikaa123/catnap.svg?branch=master)](https://travis-ci.org/mikaa123/catnap) [![Coverage Status](https://img.shields.io/coveralls/mikaa123/catnap.svg)](https://coveralls.io/r/mikaa123/catnap?branch=master)
 
-<img width="300" align="right" src="https://dl.dropboxusercontent.com/u/25944784/cnp2.png"/>
+<img width="200" align="right" src="https://dl.dropboxusercontent.com/u/25944784/cnp2.png"/>
 
-> A short nap, which allows for a quick boost in energy.
-
-Fast and simple Resource-Oriented Architecture for Node.
+> Fast and simple Resource-Oriented Architecture for Node.
 
 Catnap allows you to create elegant REST APIs by describing **REST Resources**. It takes care of creating and serving these resources for you.
 
