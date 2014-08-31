@@ -1,24 +1,24 @@
 # Catnap
 [![NPM version](https://badge.fury.io/js/catnap.svg)](http://badge.fury.io/js/catnap) [![Build Status](https://travis-ci.org/mikaa123/catnap.svg?branch=master)](https://travis-ci.org/mikaa123/catnap) [![Coverage Status](https://img.shields.io/coveralls/mikaa123/catnap.svg)](https://coveralls.io/r/mikaa123/catnap?branch=master)
 
-<img width="300" align="right" src="https://dl.dropboxusercontent.com/u/25944784/catnap.png"/>
+<img width="300" align="right" src="https://dl.dropboxusercontent.com/u/25944784/cnp2.png"/>
 
 > A short nap, which allows for a quick boost in energy.
 
-Catnap is a minimal approach to **handle REST Resources** on Express-like routers. It simplifies creating named resources and **defining their representations** while keeping your code DRY.
+Fast and simple Resource-Oriented Architecture for Node.
 
-Catnap doesn't get in your way by imposing an architecture. It can be dropped as-is on existing Express projects.
+Catnap allows you to create elegant REST APIs by describing **REST Resources**. It takes care of creating and serving these resources for you.
 
 ## Installing
 `$ npm install catnap`
 
 ## Getting Started
-Catnap lets you create **Resources** identified by a name and a path. A Resource can have one or many **representations** and respond to **actions** (get, post, put, patch an delete.) Here is a contrived example:
+Catnap lets you describe **Resources** identified by a name and a path. A Resource can have one or many **representations** and responds to **actions** (get, post, put, patch an delete.) Here is a contrived example:
 
 ~~~~javascript
-var makeResource = require('catnap').makeResource;
+var cnp = require('catnap');
 
-var userResource = makeResource('user', '/users/:userId')
+cnp.resource('user', '/users/:userId')
     .representation(function (user) {
         // The default representation. Returns a full representation of user
         return user;
@@ -28,20 +28,19 @@ var userResource = makeResource('user', '/users/:userId')
     	return pick(user, 'username', 'email');
     })
     .get(function (req, res) {
-    	// Action methods take standard middleware.
+    	// Action methods take standard connect-middlewares.
         User.findOne({ _id: req.params.userId }, function (err, user) {
-            user && res.send(200, userResource(user));
+            user && res.send(200, cnp('user')(user));
         });
     })
-    .attachTo(app);
 ~~~~
 
 The representations map **internal entities** (such as the ones in your database) into media types.
-To get the representations of `userResource`:
+To get the representations of the `user` resource:
 
 ~~~~javascript
-userResource(user); // => Calls the default representation
-userResource(user, 'partial'); // => Calls the partial representation
+cnp('user', user); // => Calls the default representation
+userResource(user, 'partial', user); // => Calls the partial representation
 ~~~~
 
 * To get started, check out the [Getting Started Guide](http://github.com/mikaa123/catnap/wiki/Getting-Started)
