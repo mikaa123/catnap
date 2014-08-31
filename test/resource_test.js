@@ -91,17 +91,17 @@ describe('Resource', function () {
 				a: 1
 			};
 
-			testResource.representation(function () {
-				return 'default';
+			testResource.representation(function (entity) {
+				return 'default ' + entity.a;
 			});
 
-			testResource(defaultEntity).should.eql('default');
+			testResource(defaultEntity).should.eql('default 1');
 
-			testResource.representation('partial', function () {
-				return 'partial';
+			testResource.representation('partial', function (entity) {
+				return 'partial ' + entity.a;
 			});
 
-			testResource(defaultEntity, 'partial').should.eql('partial');
+			testResource('partial', defaultEntity).should.eql('partial 1');
 
 			assert.throws(function () {
 				testResource.representation('err', {});
