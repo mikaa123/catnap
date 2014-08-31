@@ -1,11 +1,12 @@
-# Catnap
-[![NPM version](https://badge.fury.io/js/catnap.svg)](http://badge.fury.io/js/catnap) [![Build Status](https://travis-ci.org/mikaa123/catnap.svg?branch=master)](https://travis-ci.org/mikaa123/catnap) [![Coverage Status](https://img.shields.io/coveralls/mikaa123/catnap.svg)](https://coveralls.io/r/mikaa123/catnap?branch=master)
+# Catnap [![NPM version](https://badge.fury.io/js/catnap.svg)](http://badge.fury.io/js/catnap) [![Build Status](https://travis-ci.org/mikaa123/catnap.svg?branch=master)](https://travis-ci.org/mikaa123/catnap) [![Coverage Status](https://img.shields.io/coveralls/mikaa123/catnap.svg)](https://coveralls.io/r/mikaa123/catnap?branch=master)
 
 <img width="200" align="right" src="https://dl.dropboxusercontent.com/u/25944784/cnp2.png"/>
 
 > Fast and simple Resource-Oriented Architecture for Node.
 
-Catnap allows you to create elegant REST APIs by describing **REST Resources**. It takes care of creating and serving these resources for you.
+Catnap allows you to create elegant REST APIs by describing **REST Resources**. 
+
+It takes care of creating and serving these resources for you.
 
 ## Installing
 `$ npm install catnap`
@@ -37,8 +38,8 @@ The representations map **internal entities** (such as the ones in your database
 To get the representations of the `user` resource:
 
 ~~~~javascript
-cnp('user', user); // => Calls the default representation
-userResource(user, 'partial', user); // => Calls the partial representation
+cnp('user')(user); // => Calls the default representation
+userResource(user, 'partial')(user); // => Calls the partial representation
 ~~~~
 
 * To get started, check out the [Getting Started Guide](http://github.com/mikaa123/catnap/wiki/Getting-Started)
