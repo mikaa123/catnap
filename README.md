@@ -12,7 +12,7 @@ It takes care of creating and serving these resources for you.
 `$ npm install catnap`
 
 ## Getting Started
-Catnap lets you describe **Resources** identified by a name and a path. A Resource can have one or many **representations** and responds to **actions** (get, post, put, patch an delete.) Here is a contrived example:
+Catnap lets you describe **resources** identified by a name and a path. A resource can have one or many **representations** and responds to **actions** (get, post, put, patch an delete.) Here is a contrived example:
 
 ~~~~javascript
 var cnp = require('catnap');
@@ -39,7 +39,7 @@ To get the representations of the `user` resource:
 
 ~~~~javascript
 cnp('user')(user); // => Calls the default representation
-userResource(user, 'partial')(user); // => Calls the partial representation
+cnp('user')('partial', user); // => Calls the partial representation
 ~~~~
 
 * To get started, check out the [Getting Started Guide](http://github.com/mikaa123/catnap/wiki/Getting-Started)
