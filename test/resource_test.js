@@ -107,6 +107,12 @@ describe('Resource', function () {
 				testResource.representation('err', {});
 			});
 		});
+
+		it('should throw if the representation doesnt exist', function () {
+			assert.throws(function () {
+				testResource('unknown-representation', {});
+			});
+		});
 	});
 
 	describe('Attaching to routers', function () {
