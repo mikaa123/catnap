@@ -29,7 +29,7 @@ cnp.resource('user', '/users/:userId')
     .get(function (req, res) {
     	// Action methods take standard connect-middlewares.
         User.findOne({ _id: req.params.userId }, function (err, user) {
-            user && res.send(200, cnp('user')(user));
+            user && res.send(200, cnp('user', user));
         });
     })
 ~~~~
