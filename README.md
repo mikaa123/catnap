@@ -38,8 +38,8 @@ The representations map **internal entities** (such as the ones in your database
 To get the representations of the `user` resource:
 
 ~~~~javascript
-cnp('user')(user); // => Calls the default representation
-cnp('user')('partial', user); // => Calls the partial representation
+cnp('user', user); // => Calls the default representation
+cnp('user', 'partial', user); // => Calls the partial representation
 ~~~~
 
 * To get started, check out the [Getting Started Guide](http://github.com/mikaa123/catnap/wiki/Getting-Started)
