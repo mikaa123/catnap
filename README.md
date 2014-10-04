@@ -53,3 +53,15 @@ cnp('user')('partial', user); // => Calls the partial representation
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Licencse
+
+MIT
+
+Much thanks to [cbleslie](https://github.com/cbleslie) for the **amazing** logo!
+
+Logo is licensed under
+[Creative Commons Attribution-NonCommercial](https://creativecommons.org/licenses/by-nc/4.0/legalcode)
+
+![CC NC](http://i.creativecommons.org/l/by-nc/3.0/88x31.png "CC NC")
+
