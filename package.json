@@ -1,6 +1,6 @@
 {
   "name": "catnap",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Fast and simple Resource-Oriented Architecture for Node.",
   "repository": "https://github.com/mikaa123/catnap/blob/master/README.md",
   "main": "index.js",
