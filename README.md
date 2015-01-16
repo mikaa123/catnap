@@ -4,7 +4,7 @@
 
 > Fast and simple Resource-Oriented Architecture for Node.
 
-Catnap allows you to create elegant REST APIs by describing **REST Resources**. 
+Catnap allows you to create elegant REST APIs by describing **REST Resources**.
 
 It takes care of creating and serving these resources for you.
 
@@ -58,10 +58,10 @@ cnp('user', 'partial', user); // => Calls the partial representation
 
 MIT
 
-Much thanks to [cbleslie](https://github.com/cbleslie) for the **amazing** logo!
+Original logo design by [Kyle Decker](kyledecker.me) and their beautiful website http://catnap.co.
+Much thanks to [cbleslie](https://github.com/cbleslie) for the port!
 
-Logo is licensed under
+cbleslie's logo is licensed under
 [Creative Commons Attribution-NonCommercial](https://creativecommons.org/licenses/by-nc/4.0/legalcode)
 
 ![CC NC](http://i.creativecommons.org/l/by-nc/3.0/88x31.png "CC NC")
-
