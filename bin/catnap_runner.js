@@ -1,9 +1,11 @@
 var express = require('express'),
 	app = express(),
 	port = process.argv[2] || 3000,
-	router = express.Router();
+	router = express.Router(),
+	bodyParser = require('body-parser');
 
 app
+	.use(bodyParser.json())
 	.use(router)
 	.use(function(req, res, next) {
 		res.send(404, 'Sorry cant find that!');
